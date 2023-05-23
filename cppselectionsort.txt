@@ -1,0 +1,46 @@
+--dart-http-boundary-JH+sEpQTMZvEAePzK.8DiMb7F7xgrU-TT24-9a+oQY1ycSIc-9H
+content-type: application/octet-stream
+content-disposition: form-data; name="file"; filename="selectionsort.txt"
+
+#include <bits/stdc++.h>
+using namespace std;
+
+void selection_sort(vector<int> &nums,int size){
+    
+    for(int i=0;i<size;i++){
+        int mn = i;
+        for(int j=i+1;j<size;j++){
+            if(nums[j] < nums[mn]) mn = j;
+        }
+        int temp = nums[mn];
+        nums[mn] = nums[i];
+        nums[i] = temp;
+    }
+    
+    cout << "Elements in sorted order: ";
+    for(int i=0;i<size;i++){
+        cout << nums[i] << " ";
+    }
+}
+
+int main() {
+    // Write C++ code here
+    int n;
+    cout <<"Enter numbers of element ";
+    cin >> n;
+    vector<int> nums(n,0);
+    for(int i=0;i<n;i++){
+        int x; cin >> x;
+        nums[i] = x;
+    }
+    selection_sort(nums,n);
+    return 0;
+}
+
+
+Output:
+
+Enter numbers of element 5
+12 3 4 5 18
+Elements in sorted order: 3 4 5 12 18 
+--dart-http-boundary-JH+sEpQTMZvEAePzK.8DiMb7F7xgrU-TT24-9a+oQY1ycSIc-9H--

@@ -1,0 +1,104 @@
+--dart-http-boundary-+xa9qEA0W6JU2Zomq1xs4rPDqligDMl6LWaAt31I2fRD1C.Jpf7
+content-type: application/octet-stream
+content-disposition: form-data; name="file"; filename="n-queen.txt"
+
+// Online C++ compiler to run C++ program online
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+    
+    bool isSafe(int row,int col, vector<string> &board, int n){
+        int duprow = row;
+        int dupcol = col;
+        
+        while(row >= 0 && col >= 0){
+            if(board[row][col] == 'Q') return false;
+            row--;
+            col--;
+        }
+        
+        col = dupcol;
+        row = duprow;
+        while(col >= 0){
+            if(board[row][col] == 'Q') return false;
+            col--;
+        }
+        
+        col = dupcol;
+        row = duprow;
+        while(row <n && col >=0){
+            if(board[row][col] == 'Q') return false;
+            row++;
+            col--;
+        }
+        return true;
+    }
+    
+    void solve(int col,vector<string> &board, vector<vector<string>> &ans, int n){
+        if(col == n) {
+            ans.push_back(board);
+            return;
+        }
+        
+        for(int row=0;row<n;row++){
+            if(isSafe(row,col,board,n)){
+                board[row][col] = 'Q';
+                solve(col+1,board,ans,n);
+                board[row][col] = '.';
+            }
+        }
+    }
+    
+public:
+    vector<vector<string>> solveNQueens(int n){
+        vector<vector<string>> ans;
+        vector<string> board(n);
+        string s(n,'.');
+        for(int i=0;i<n;i++){
+            board[i] = s;
+        }
+        
+        solve(0,board, ans,n);
+        return ans;
+    }
+};
+
+int main() {
+    Solution obj;
+    cout << "Enter size of cless board \n";
+    int n;
+    cin >> n;
+    vector<vector<string>> ans = obj.solveNQueens(n);
+    cout << "There are " << ans.size() << " Possible ways we can get our ans: " << endl;
+    for(auto it: ans){
+        
+        for(int i=0;i<n;i++){
+            cout << '|';
+            for(int j=0;j<n;j++){
+                cout << it[i][j];
+            }
+            cout << '|';
+            cout << endl;
+        }
+        cout << endl;
+    }
+    return 0;
+}
+
+
+OUTPUT:
+
+Enter size of cless board
+4
+There are 2 Possible ways we can get our ans: 
+|..Q.|
+|Q...|
+|...Q|
+|.Q..|
+
+|.Q..|
+|...Q|
+|Q...|
+|..Q.|
+--dart-http-boundary-+xa9qEA0W6JU2Zomq1xs4rPDqligDMl6LWaAt31I2fRD1C.Jpf7--
